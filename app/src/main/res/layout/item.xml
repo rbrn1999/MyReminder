@@ -8,11 +8,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorRecyclerViewBackground">
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="94dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="         " />

@@ -1,0 +1,4 @@
+#Sun Jun 07 18:13:44 GMT+08:00 2020
+base.0=D\:\\Github\\MyReminder\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
