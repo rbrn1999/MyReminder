@@ -17,15 +17,15 @@
 package com.example.android.recyclerview;
 
 import android.content.Context;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputEditText;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import java.util.LinkedList;
 
@@ -33,18 +33,25 @@ import java.util.LinkedList;
  * Shows how to implement a simple Adapter for a RecyclerView.
  * Demonstrates how to add a click handler for each item in the ViewHolder.
  */
-public class WordListAdapter extends
-        RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
+public class CategoryListAdapter extends
+        RecyclerView.Adapter<CategoryListAdapter.CategoryViewHolder> {
+    private static final String TAG = "CategoryListAdapter";
 
-    private final LinkedList<String> mWordList;
+    private final LinkedList<String> mCategoryList;
     private final LayoutInflater mInflater;
-    private RecyclerView mRecyclerView;
+    private Context context;
+    private RecyclerView.RecycledViewPool recycledViewPool;
     private ItemAdapter mItemAdapter ;
-
-    class WordViewHolder extends RecyclerView.ViewHolder
+//    private LinearLayoutManager itemLayoutManager = new LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false);
+    class CategoryViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
         public final EditText wordItemView;
-        final WordListAdapter mAdapter;
+        final CategoryListAdapter mAdapter;
+        private RecyclerView mItemRecyclerView;
+        private LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        private RecyclerView.RecycledViewPool recycledViewPool;
+        private final LinkedList<String> mItemList = new LinkedList<>();
+
 
         /**
          * Creates a new custom view holder to hold the view to display in
@@ -54,11 +61,34 @@ public class WordListAdapter extends
          * @param adapter The adapter that manages the the data and views
          *                for the RecyclerView.
          */
-        public WordViewHolder(View itemView, WordListAdapter adapter) {
+        public CategoryViewHolder(View itemView, CategoryListAdapter adapter) {
             super(itemView);
+            Log.d(TAG, "ViewHolder: created");
             wordItemView = itemView.findViewById(R.id.category);
             this.mAdapter = adapter;
-            itemView.setOnClickListener(this);
+            ImageButton newBtn = (ImageButton) itemView.findViewById(R.id.new_button);
+           newBtn.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Log.d(TAG, "new button tapped");
+                   int itemListSize = mItemList.size();
+                   // Add a new word to the wordList.
+                   mItemList.addLast("new Item");
+                   // Notify the adapter, that the data has changed.
+                   mItemRecyclerView.getAdapter().notifyItemInserted(itemListSize);
+                   // Scroll to the bottom.
+                   mItemRecyclerView.smoothScrollToPosition(itemListSize);
+               }
+           });
+
+            // Create recycler view.
+            mItemRecyclerView = itemView.findViewById(R.id.item_recyclerview);
+//            // Create an adapter and supply the data to be displayed.
+//            mItemAdapter = new ItemAdapter(context, mItemList);
+//            // Connect the adapter with the recycler view.
+//            mItemRecyclerView.setAdapter(mAdapter);
+            // Give the recycler view a default layout manager.
+            mItemRecyclerView.setLayoutManager(layoutManager);
         }
 
         @Override
@@ -67,10 +97,10 @@ public class WordListAdapter extends
             int mPosition = getLayoutPosition();
 
             // Use that to access the affected item in mWordList.
-            String element = mWordList.get(mPosition);
+            String element = mCategoryList.get(mPosition);
             // Change the word in the mWordList.
 
-//            mWordList.set(mPosition, "Clicked! " + element);
+//            mCategoryList.set(mPosition, "Clicked! " + element);
             // Notify the adapter, that the data has changed so it can
             // update the RecyclerView to display the data.
             mAdapter.notifyDataSetChanged();
@@ -78,9 +108,11 @@ public class WordListAdapter extends
 
     }
 
-    public WordListAdapter(Context context, LinkedList<String> wordList) {
+    public CategoryListAdapter(Context context, LinkedList<String> categoryList) {
+        this.context = context;
         mInflater = LayoutInflater.from(context);
-        this.mWordList = wordList;
+        this.mCategoryList = categoryList;
+        recycledViewPool = new RecyclerView.RecycledViewPool();
     }
 
     /**
@@ -102,13 +134,14 @@ public class WordListAdapter extends
      * @param viewType The view type of the new View. @return A new ViewHolder
      *                 that holds a View of the given view type.
      */
+
     @Override
-    public WordListAdapter.WordViewHolder onCreateViewHolder(ViewGroup parent,
-                                                             int viewType) {
+    public CategoryViewHolder onCreateViewHolder(ViewGroup parent,
+                                                 int viewType) {
         // Inflate an item view.
         View mItemView = mInflater.inflate(
-                R.layout.wordlist_item, parent, false);
-        return new WordViewHolder(mItemView, this);
+                R.layout.categotylist_item, parent, false);
+        return new CategoryViewHolder(mItemView, this);
     }
 
     /**
@@ -122,12 +155,15 @@ public class WordListAdapter extends
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(WordListAdapter.WordViewHolder holder,
+    public void onBindViewHolder(CategoryViewHolder holder,
                                  int position) {
         // Retrieve the data for that position.
-        String mCurrent = mWordList.get(position);
+        String mCurrent = mCategoryList.get(position);
         // Add the data to the view holder.
         holder.wordItemView.setText(mCurrent);
+        mItemAdapter = new ItemAdapter(this.context, new LinkedList<String>());
+        holder.mItemRecyclerView.setAdapter(mItemAdapter);
+        holder.mItemRecyclerView.setRecycledViewPool(recycledViewPool);
     }
 
     /**
@@ -137,6 +173,6 @@ public class WordListAdapter extends
      */
     @Override
     public int getItemCount() {
-        return mWordList.size();
+        return mCategoryList.size();
     }
 }

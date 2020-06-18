@@ -16,15 +16,18 @@
 
 package com.example.android.recyclerview;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.LinkedList;
 
@@ -34,11 +37,11 @@ import java.util.LinkedList;
  * - Clicking the fab button adds a new word to the list.
  */
 public class MainActivity extends AppCompatActivity {
-
-    private final LinkedList<String> mWordList = new LinkedList<>();
+    private static final String TAG = "MainActivity";
+    private final LinkedList<String> mCategoryList = new LinkedList<>();
 
     private RecyclerView mRecyclerView;
-    private WordListAdapter mAdapter;
+    private CategoryListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,30 +49,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int wordListSize = mWordList.size();
+                Log.d(TAG, "onClick: fab");
+                int categoryListSize = mCategoryList.size();
                 // Add a new word to the wordList.
-                mWordList.addLast("Category");
+                mCategoryList.addLast("new category");
                 // Notify the adapter, that the data has changed.
-                mRecyclerView.getAdapter().notifyItemInserted(wordListSize);
+                mRecyclerView.getAdapter().notifyItemInserted(categoryListSize);
                 // Scroll to the bottom.
-                mRecyclerView.smoothScrollToPosition(wordListSize);
+                mRecyclerView.smoothScrollToPosition(categoryListSize);
             }
         });
 
         // Put initial data into the word list.
         for (int i = 0; i < 3; ) {
-            mWordList.addLast("Category  " + ++i);
+            mCategoryList.addLast("Category  " + ++i);
         }
 
         // Create recycler view.
         mRecyclerView = findViewById(R.id.recyclerview);
         // Create an adapter and supply the data to be displayed.
-        mAdapter = new WordListAdapter(this, mWordList);
+        mAdapter = new CategoryListAdapter(this, mCategoryList);
         // Connect the adapter with the recycler view.
         mRecyclerView.setAdapter(mAdapter);
         // Give the recycler view a default layout manager.
@@ -110,5 +113,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void hideSoftKeyBoard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+
+        if(imm.isAcceptingText()) { // verify if the soft keyboard is open
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

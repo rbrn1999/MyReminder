@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Github\\MyReminder\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
+            "outputFile": "/Users/sparkz2o/School_Work/Android/My Reminder/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v26/values-v26.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-2\\files-2.1\\9bab41cd1cac7e96d8cf039a3df31825\\appcompat-v7-27.1.1\\res\\values-v26\\values-v26.xml",
+                    "source": "/Users/sparkz2o/.gradle/caches/transforms-2/files-2.1/9bab41cd1cac7e96d8cf039a3df31825/appcompat-v7-27.1.1/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-2\\files-2.1\\00ef7feff03d4d1c1dbd16092dcf85dc\\design-27.1.1\\res\\values-v26\\values-v26.xml",
+                    "source": "/Users/sparkz2o/.gradle/caches/transforms-2/files-2.1/00ef7feff03d4d1c1dbd16092dcf85dc/design-27.1.1/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
