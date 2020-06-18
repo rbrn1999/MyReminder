@@ -17,7 +17,6 @@
 package com.example.android.recyclerview;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,7 +36,7 @@ public class CategoryListAdapter extends
         RecyclerView.Adapter<CategoryListAdapter.CategoryViewHolder> {
     private static final String TAG = "CategoryListAdapter";
 
-    private final LinkedList<String> mCategoryList;
+    private final LinkedList<Data> mDataList;
     private final LayoutInflater mInflater;
     private Context context;
     private RecyclerView.RecycledViewPool recycledViewPool;
@@ -83,10 +82,11 @@ public class CategoryListAdapter extends
 
             // Create recycler view.
             mItemRecyclerView = itemView.findViewById(R.id.item_recyclerview);
+            mItemAdapter = new ItemAdapter(context, mItemList);
 //            // Create an adapter and supply the data to be displayed.
 //            mItemAdapter = new ItemAdapter(context, mItemList);
 //            // Connect the adapter with the recycler view.
-//            mItemRecyclerView.setAdapter(mAdapter);
+            mItemRecyclerView.setAdapter(mItemAdapter);
             // Give the recycler view a default layout manager.
             mItemRecyclerView.setLayoutManager(layoutManager);
         }
@@ -97,7 +97,7 @@ public class CategoryListAdapter extends
             int mPosition = getLayoutPosition();
 
             // Use that to access the affected item in mWordList.
-            String element = mCategoryList.get(mPosition);
+            Data element = mDataList.get(mPosition);
             // Change the word in the mWordList.
 
 //            mCategoryList.set(mPosition, "Clicked! " + element);
@@ -108,10 +108,10 @@ public class CategoryListAdapter extends
 
     }
 
-    public CategoryListAdapter(Context context, LinkedList<String> categoryList) {
+    public CategoryListAdapter(Context context, LinkedList<Data> dataList) {
         this.context = context;
         mInflater = LayoutInflater.from(context);
-        this.mCategoryList = categoryList;
+        this.mDataList = dataList;
         recycledViewPool = new RecyclerView.RecycledViewPool();
     }
 
@@ -158,10 +158,9 @@ public class CategoryListAdapter extends
     public void onBindViewHolder(CategoryViewHolder holder,
                                  int position) {
         // Retrieve the data for that position.
-        String mCurrent = mCategoryList.get(position);
+        String mCurrent = mDataList.get(position).category;
         // Add the data to the view holder.
         holder.wordItemView.setText(mCurrent);
-        mItemAdapter = new ItemAdapter(this.context, new LinkedList<String>());
         holder.mItemRecyclerView.setAdapter(mItemAdapter);
         holder.mItemRecyclerView.setRecycledViewPool(recycledViewPool);
     }
@@ -173,6 +172,6 @@ public class CategoryListAdapter extends
      */
     @Override
     public int getItemCount() {
-        return mCategoryList.size();
+        return mDataList.size();
     }
 }

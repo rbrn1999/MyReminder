@@ -37,7 +37,7 @@
             android:paddingLeft="8sp"
             android:paddingTop="10px"
             android:text="@string/new_item"
-            android:textColor="#fcf537"
+            android:textColor="#FF6D00"
             android:textSize="26sp" />
 
 

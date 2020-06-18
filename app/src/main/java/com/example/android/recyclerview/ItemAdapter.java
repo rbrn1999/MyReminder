@@ -49,7 +49,7 @@ public class ItemAdapter extends
     public SubViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View mItemView = mInflater.inflate(
                 R.layout.sublist_item, parent, false);
-        return new SubViewHolder(mItemView, this, new LinkedList<String>()); //TODO: pass data
+        return new SubViewHolder(mItemView, this, this.mList);
     }
 
     @Override

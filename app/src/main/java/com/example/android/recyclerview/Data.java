@@ -3,11 +3,14 @@ package com.example.android.recyclerview;
 import java.util.LinkedList;
 
 public class Data {
-    private String category;
-    private LinkedList<String> item;
+    public String category;
+    public LinkedList<String> itemList;
 
     public Data() {
         category = "";
-        item = new LinkedList<>();
+        itemList = new LinkedList<>();
+    }
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

@@ -38,7 +38,7 @@ import java.util.LinkedList;
  */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private final LinkedList<String> mCategoryList = new LinkedList<>();
+    private final LinkedList<Data> mDataList = new LinkedList<>();
 
     private RecyclerView mRecyclerView;
     private CategoryListAdapter mAdapter;
@@ -54,25 +54,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: fab");
-                int categoryListSize = mCategoryList.size();
+                int dataListSize = mDataList.size();
                 // Add a new word to the wordList.
-                mCategoryList.addLast("new category");
+                Data newData = new Data();
+                newData.setCategory("new category");
+                mDataList.addLast(newData);
                 // Notify the adapter, that the data has changed.
-                mRecyclerView.getAdapter().notifyItemInserted(categoryListSize);
+                mRecyclerView.getAdapter().notifyItemInserted(dataListSize);
                 // Scroll to the bottom.
-                mRecyclerView.smoothScrollToPosition(categoryListSize);
+                mRecyclerView.smoothScrollToPosition(dataListSize);
             }
         });
 
         // Put initial data into the word list.
         for (int i = 0; i < 3; ) {
-            mCategoryList.addLast("Category  " + ++i);
+            Data newData = new Data();
+            newData.setCategory("Category" + ++i);
+            mDataList.addLast(newData);
         }
 
         // Create recycler view.
         mRecyclerView = findViewById(R.id.recyclerview);
         // Create an adapter and supply the data to be displayed.
-        mAdapter = new CategoryListAdapter(this, mCategoryList);
+        mAdapter = new CategoryListAdapter(this, mDataList);
         // Connect the adapter with the recycler view.
         mRecyclerView.setAdapter(mAdapter);
         // Give the recycler view a default layout manager.
