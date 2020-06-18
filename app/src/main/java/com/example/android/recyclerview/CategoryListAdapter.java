@@ -40,7 +40,7 @@ public class CategoryListAdapter extends
     private final LayoutInflater mInflater;
     private Context context;
     private RecyclerView.RecycledViewPool recycledViewPool;
-    private ItemAdapter mItemAdapter ;
+    private ItemListAdapter mItemListAdapter;
 //    private LinearLayoutManager itemLayoutManager = new LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false);
     class CategoryViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
@@ -82,11 +82,11 @@ public class CategoryListAdapter extends
 
             // Create recycler view.
             mItemRecyclerView = itemView.findViewById(R.id.item_recyclerview);
-            mItemAdapter = new ItemAdapter(context, mItemList);
+            mItemListAdapter = new ItemListAdapter(context, mItemList);
 //            // Create an adapter and supply the data to be displayed.
 //            mItemAdapter = new ItemAdapter(context, mItemList);
 //            // Connect the adapter with the recycler view.
-            mItemRecyclerView.setAdapter(mItemAdapter);
+            mItemRecyclerView.setAdapter(mItemListAdapter);
             // Give the recycler view a default layout manager.
             mItemRecyclerView.setLayoutManager(layoutManager);
         }
@@ -161,7 +161,7 @@ public class CategoryListAdapter extends
         String mCurrent = mDataList.get(position).category;
         // Add the data to the view holder.
         holder.wordItemView.setText(mCurrent);
-        holder.mItemRecyclerView.setAdapter(mItemAdapter);
+        holder.mItemRecyclerView.setAdapter(mItemListAdapter);
         holder.mItemRecyclerView.setRecycledViewPool(recycledViewPool);
     }
 

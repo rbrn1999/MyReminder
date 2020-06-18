@@ -11,14 +11,14 @@ import android.widget.EditText;
 
 import java.util.LinkedList;
 
-public class ItemAdapter extends
-        RecyclerView.Adapter<ItemAdapter.SubViewHolder> {
+public class ItemListAdapter extends
+        RecyclerView.Adapter<ItemListAdapter.SubViewHolder> {
     private static final String TAG = "ItemAdapter";
     private final LinkedList<String> mList;
     private final LayoutInflater mInflater;
 
 
-    public ItemAdapter(Context context, LinkedList<String> mItemList) {
+    public ItemListAdapter(Context context, LinkedList<String> mItemList) {
         mInflater = LayoutInflater.from(context);
         this.mList = mItemList;
     }
@@ -26,10 +26,10 @@ public class ItemAdapter extends
     class SubViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
         public final EditText wordItemText;
-        final ItemAdapter mAdapter;
+        final ItemListAdapter mAdapter;
         private final LinkedList<String> mItemList;
 
-        public SubViewHolder(View itemView, ItemAdapter adapter, LinkedList<String> mItemList) {
+        public SubViewHolder(View itemView, ItemListAdapter adapter, LinkedList<String> mItemList) {
             super(itemView);
             this.mItemList = mItemList;
             Log.d(TAG, "ViewHolder: created");
@@ -54,7 +54,10 @@ public class ItemAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull SubViewHolder holder, int position) {
-//        holder.wordItemText.setText("new item");
+        // Retrieve the data for that position.
+        String mCurrent = mList.get(position);
+        // Add the data to the view holder.
+        holder.wordItemText.setText(mCurrent);
     }
 
 
