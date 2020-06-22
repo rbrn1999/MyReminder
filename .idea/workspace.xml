@@ -237,9 +237,10 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="1135" y="569" key="AndroidCreateXmlResourceDialog/0.0.2560.1440@0.0.2560.1440" timestamp="1592408162710" />
-    <state x="230" y="235" width="1570" height="970" key="CommitChangelistDialog2" timestamp="1592445352932">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state x="151" y="171" width="1570" height="970" key="CommitChangelistDialog2" timestamp="1592798179119">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
+    <state x="151" y="171" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1592798179119" />
     <state x="230" y="235" width="1570" height="970" key="CommitChangelistDialog2/0.0.2560.1440@0.0.2560.1440" timestamp="1592445352932" />
     <state x="100" y="100" width="1259" height="1240" key="DiffContextDialog" timestamp="1592409010742">
       <screen x="78" y="23" width="2482" height="1417" />
@@ -301,9 +302,10 @@
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
     <state x="353" y="359" key="SettingsEditor/0.0.2560.1440@0.0.2560.1440" timestamp="1592311424111" />
-    <state x="329" y="456" key="Vcs.Push.Dialog.v2" timestamp="1592445359917">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state x="216" y="333" key="Vcs.Push.Dialog.v2" timestamp="1592798186296">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
+    <state x="216" y="333" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1592798186296" />
     <state x="329" y="456" key="Vcs.Push.Dialog.v2/0.0.2560.1440@0.0.2560.1440" timestamp="1592445359917" />
     <state x="100" y="100" width="2360" height="1240" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1592310733754">
       <screen x="84" y="23" width="2476" height="1417" />
