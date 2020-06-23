@@ -1,3 +1,4 @@
 My Reminder
 
-期末報告：Android_final_report.pptx
+第13組
+簡報：Android_final_report.pptx
