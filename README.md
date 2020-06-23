@@ -1,3 +1,3 @@
-Reminder app
+My Reminder
 
-built with Android Studio
+期末報告：android_final_report.pptx
